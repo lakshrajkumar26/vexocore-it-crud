@@ -5,7 +5,7 @@ const cors = require("cors");
 const db = require("./Config/db");
 const authRoutes = require("./routes/authRoute");
 const userRoutes = require("./routes/userRoute");
-const employeeRoutes = require("./routes/employeeRoute");
+const taskRoutes = require("./routes/taskRoute");
 
 require("dotenv").config();
 const errorHandler = require("./middleware/ErrorHandler.middleware");
@@ -22,7 +22,9 @@ app.use(express.json());
 
 app.use("/api/auth",authRoutes);
 app.use("/api/user",userRoutes);
-app.use("/api/employee",employeeRoutes);
+
+app.use("/api/task",taskRoutes);
+
 
 
 app.get("/",(_,res) => {
