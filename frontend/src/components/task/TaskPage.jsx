@@ -19,7 +19,6 @@ export default function TodoWithSidebar() {
   const [refresh, setRefresh] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
-  // Fetch all todos
   useEffect(() => {
     const fetchTodos = async () => {
       try {
@@ -35,13 +34,11 @@ export default function TodoWithSidebar() {
     fetchTodos();
   }, [refresh]);
 
-  // Start editing
   const handleEdit = (todo) => {
     setEditingId(todo._id);
     setEditValue(todo.text);
   };
 
-  // Save update
   const handleSave = async (id) => {
     if (!editValue.trim()) return;
     try {
@@ -61,12 +58,11 @@ export default function TodoWithSidebar() {
     }
   };
 
-  // Toggle task status
   const toggleStatus = async (id, completed) => {
     try {
       const token = localStorage.getItem("token");
       await baseAPI.patch(
-        `/api/task/${id}/${completed ? "pending" : "status"}/`,
+        `/api/task/${id}/${completed ? "pending" : "status"}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -76,7 +72,6 @@ export default function TodoWithSidebar() {
     }
   };
 
-  // Delete task
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
@@ -89,7 +84,6 @@ export default function TodoWithSidebar() {
     }
   };
 
-  // Add new task
   const handleAddTask = async () => {
     const taskText = prompt("Enter new task:");
     if (!taskText) return;
@@ -107,7 +101,6 @@ export default function TodoWithSidebar() {
     }
   };
 
-  // Toggle important
   const toggleImportant = async (id) => {
     try {
       const token = localStorage.getItem("token");
@@ -124,7 +117,7 @@ export default function TodoWithSidebar() {
     }
   };
 
-  // Filter todos
+  // Updated filtering logic
   const filteredTodos = todos.filter((todo) => {
     const today = new Date();
     const taskDate = new Date(todo.createdAt);
@@ -137,8 +130,9 @@ export default function TodoWithSidebar() {
     if (activeTab === "today" && !isToday) return false;
     if (activeTab === "important" && !todo.important) return false;
     if (activeTab === "tasks" && todo.type !== "task") return false;
-    if (showCompleted && !todo.completed) return false;
-    return true;
+
+    // Explicit pending/completed filter
+    return showCompleted ? todo.completed : !todo.completed;
   });
 
   return (
@@ -264,3 +258,5 @@ export default function TodoWithSidebar() {
     </div>
   );
 }
+
+
