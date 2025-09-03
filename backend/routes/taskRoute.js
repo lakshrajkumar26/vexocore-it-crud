@@ -6,6 +6,7 @@ const {
   deleteTask,
   completeTodo,
   pendingTodo,
+  setFavourite
 } = require("../controllers/taskController");
 const { verifyJWT } = require("../middleware/auth.Middleware");
 const router = express.Router();
@@ -21,5 +22,6 @@ router.patch("/:id/status", completeTodo);   // Update status (completed/pending
 router.patch("/:id/pending", pendingTodo); 
 router.put("/:id", updateTask);              // Update a task
 router.delete("/:id", deleteTask);           // Delete a task
+router.patch("/:id/favorite", setFavourite);   
 
 module.exports = router;

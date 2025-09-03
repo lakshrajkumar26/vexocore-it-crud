@@ -84,7 +84,6 @@ const pendingTodo = asyncHandler(async (req, res, next) => {
   res.status(200).json({ message: "Todo completed", data: todo });
 });
 
-
 // Delete task
 const deleteTask = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
@@ -98,4 +97,19 @@ const deleteTask = asyncHandler(async (req, res, next) => {
   res.json({ message: "Task deleted successfully" });
 });
 
-module.exports = { getTasks, createTask, updateTask, deleteTask, completeTodo ,pendingTodo };
+const setFavourite = asyncHandler(async (req, res) => {
+  const task = await Task.findById(req.params.id);
+  task.important = !task.important; 
+  await task.save();
+  res.json({ success: true, data: task });
+});
+
+module.exports = {
+  getTasks,
+  createTask,
+  updateTask,
+  deleteTask,
+  completeTodo,
+  pendingTodo,
+  setFavourite
+};

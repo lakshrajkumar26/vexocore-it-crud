@@ -18,6 +18,43 @@ const loginSchema = z.object({
   password: z.string().min(6),
 });
 
+// const register = asyncHandler(async (req, res, next) => {
+//   const validatedData = employeeCreateSchema.parse(req.body);
+//   console.log("data getting after parsed", validatedData);
+
+//   const { name, email, phone, password, position, role } = validatedData;
+
+//   const user = await Employee.findOne({ email });
+
+//   if (user) {
+//     throw new ApiError("User already Existed", 409);
+//   }
+
+//   const hashPass = await bcrypt.hash(password, 10);
+
+//   const newEmployee = await Employee.create({
+//     name,
+//     email,
+//     phone,
+//     password: hashPass,
+//     position,
+//     role,
+//   },{new :true });
+
+//   // const { password: pass, ...dataWithoutPassword } = newEmployee.toObject();
+
+  
+//   const token = jwt.sign({ userId: newEmployee._id, role: newEmployee.role }, secretKey, {
+//     expiresIn: process.env.JWT_EXPIRES_IN,
+//   });
+
+//   res.status(201).json({
+//     message: "User created succesfully",
+//     data: dataWithoutPassword,
+//     success: true,
+//   });
+// });
+
 const register = asyncHandler(async (req, res, next) => {
   const validatedData = employeeCreateSchema.parse(req.body);
   console.log("data getting after parsed", validatedData);
@@ -25,9 +62,8 @@ const register = asyncHandler(async (req, res, next) => {
   const { name, email, phone, password, position, role } = validatedData;
 
   const user = await Employee.findOne({ email });
-
   if (user) {
-    throw new ApiError("User already Existed", 409);
+    throw new ApiError("User already exists", 409);
   }
 
   const hashPass = await bcrypt.hash(password, 10);
@@ -43,12 +79,20 @@ const register = asyncHandler(async (req, res, next) => {
 
   const { password: pass, ...dataWithoutPassword } = newEmployee.toObject();
 
+  const token = jwt.sign(
+    { userId: newEmployee._id, role: newEmployee.role },
+    secretKey,
+    { expiresIn: process.env.JWT_EXPIRES_IN }
+  );
+
   res.status(201).json({
-    message: "User created succesfully",
+    message: "User created successfully",
     data: dataWithoutPassword,
+    token,
     success: true,
   });
 });
+
 
 const login = asyncHandler(async (req, res, next) => {
   // const {password } = req.body;

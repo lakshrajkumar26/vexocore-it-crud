@@ -32,12 +32,13 @@ const LoginPage = () => {
       console.log(res);
 
       if (res?.data.success) setMessage(res?.data?.message);
-      setUser(res.data?.data)
       //  console.log(res.data.data)
       const token = res.data?.token;
-      const user = res.data?.data?._id;
+      const userData = res.data?.data;
+
+      setUser(userData);
       localStorage.setItem("token", token);
-      localStorage.setItem("user", user);  // if user already login  no need 
+      localStorage.setItem("user", JSON.stringify(userData)); 
       navigate("/task")
     } catch (err) {
       
@@ -105,11 +106,11 @@ const LoginPage = () => {
               {" "}
               <p className="text-sm text-gray-900 dark:text-gray-400 py-2">
                 Not a member yet?
-                <Link className="text-blue-500 hover:underline text-base px-1">
+                <Link  to="/register" className="text-blue-500 hover:underline text-base px-1">
                   Sign Up
                 </Link>
               </p>
-              <Link className="text-sm text-gray-900 dark:text-gray-400 py-2 hover:text-blue-500 ">
+              <Link  className="text-sm text-gray-900 dark:text-gray-400 py-2 hover:text-blue-500 ">
                 forgot Password
               </Link>
             </div>

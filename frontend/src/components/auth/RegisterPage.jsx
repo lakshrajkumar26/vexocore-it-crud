@@ -20,26 +20,27 @@ const RegisterPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await baseAPI.post("/api/auth/register", formData);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await baseAPI.post("/api/auth/register", formData);
 
-      if (res?.data.success) {
-        setMessage(res?.data?.message);
-        setUser(res.data?.data);
+    if (res?.data.success) {
+      setMessage(res?.data?.message);
+      const userData = res.data?.data;
 
-        const token = res.data?.token;
-        const user = res.data?.data?._id;
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", user);
+      setUser(userData);
+      const token = res.data?.token;
 
-        navigate("/dashboard");
-      }
-    } catch (err) {
-      setError(err?.response?.data?.message || "Registration failed");
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(userData)); 
+
+      navigate("/task");
     }
-  };
+  } catch (err) {
+    setError(err?.response?.data?.message || "Registration failed");
+  }
+};
 
   return (
     <div className="min-h-screen w-full flex flex-row bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
@@ -87,6 +88,17 @@ const RegisterPage = () => {
                 type="email"
                 name="email"
                 placeholder="Enter your email"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="flex flex-col mb-6">
+              <label className="mb-2">Phone Number</label>
+              <input
+                className="py-2 px-4 bg-gray-100 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                type="text"
+                name="phoneNumber"
+                placeholder="Enter your Phone Number"
                 onChange={handleChange}
                 required
               />

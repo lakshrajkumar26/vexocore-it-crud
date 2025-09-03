@@ -25,6 +25,7 @@ const Navbar = () => {
   // Logout
   const handleClick = () => {
     setUser(null);
+    localStorage.removeItem("token");
     navigate("/login");
   };
 
@@ -36,13 +37,17 @@ const Navbar = () => {
         <nav className="space-x-6 flex items-center">
           <Link className="hover:text-blue-600" to="/">Home</Link>
           <Link className="hover:text-blue-600" to="/features">Features</Link>
+          
 
           {user?.name ? (
             <>
-              <Link className="hover:text-blue-600" to="/task">Dashboard</Link>
+               <Link className="hover:text-blue-600" to="/task">Your Tasks</Link>
+              <Link className="hover:text-blue-600" to="/dashboard">Dashboard</Link>
+
               <Link className="hover:text-blue-600" to="/profile">
                 Welcome, {user.name}
               </Link>
+             
               <button
                 onClick={handleClick}
                 className="hover:text-blue-600 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700"
