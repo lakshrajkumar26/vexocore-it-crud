@@ -14,7 +14,7 @@ require("dotenv").config();
 const errorHandler = require("./middleware/ErrorHandler.middleware");
 
 
-const allowedOrigin = ["http://localhost:5173",process.env.FRONTEND_URL];
+const allowedOrigin = ["http://localhost:5173",process.env.FRONTEND_URL ,"https://vexocore-it-crud-jqo1-g8iy9txa3-lakshrajkumar26s-projects.vercel.app"];
 
 app.use(cors({
     origin:allowedOrigin,
