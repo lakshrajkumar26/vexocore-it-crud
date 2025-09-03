@@ -47,11 +47,10 @@ const handleSubmit = async (e) => {
       {/* Left Section */}
       <div className="flex flex-1 justify-center items-center">
         <div className="flex flex-col">
-          <h1 className="font-bold text-2xl">Vaid PR EMS Portal</h1>
-          <p className="text-sm text-gray-900 dark:text-gray-400 py-2">
-            Personal relation company to handle the relationship for you, so
-            you can work peacefully.
-          </p>
+         <h1 className="font-bold text-2xl">Task Manager </h1>
+            <p className="text-sm text-gray-900 dark:text-gray-400 py-2">
+             Makes your life easy
+            </p>
         </div>
       </div>
 
