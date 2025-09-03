@@ -6,9 +6,9 @@ A full-stack MERN application built with **MongoDB, Express.js, React, and Node.
 
 ## 🚀 Live Demo
 
-- **Frontend:** [https://your-frontend.onrender.com](https://your-frontend.onrender.com)
-- **Backend API:** [https://your-backend.onrender.com](https://your-backend.onrender.com)
-- **GitHub Repository:** [https://github.com/yourusername/your-repo](https://github.com/yourusername/your-repo)
+- **Frontend:** [https://your-frontend.onrender.com](https://vexocore-it-crud-jqo1.vercel.app/task)](https://your-frontend.onrender.com)
+- **Backend API:** [[https://your-backend.onrender.com](https://vexocore-it-crud.onrender.com)] 
+- **GitHub Repository:** [[https://github.com/yourusername/your-rep](https://github.com/lakshrajkumar26/vexocore-it-crud)](https://github.com/yourusername/your-repo)
 
 ---
 
