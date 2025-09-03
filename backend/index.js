@@ -34,7 +34,7 @@ app.use("/api/task",taskRoutes);
 
 
 app.get("/",(_,res) => {
-    res.send("hi come here")
+    res.send("sserver is healthy")
 })
 
 
