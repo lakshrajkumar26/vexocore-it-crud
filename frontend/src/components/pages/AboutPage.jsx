@@ -7,6 +7,7 @@ import {
   SiJsonwebtokens,
   SiTailwindcss,
   SiGithub,
+  SiDocker,
 } from "react-icons/si";
 
 export default function AboutPage() {
@@ -37,6 +38,10 @@ export default function AboutPage() {
     {
       name: "GitHub",
       icon: <SiGithub className="w-10 h-10 text-gray-900 dark:text-gray-100" />,
+    },
+     {
+      name: "Docker",
+      icon: <SiDocker className="w-10 h-10 text-gray-900 dark:text-gray-100" />,
     },
   ];
 
